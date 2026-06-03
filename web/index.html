@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0D47A1" />
+  <title>ABC Bank — Personal Loan</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCREEN 0 · MOBILE OTP VERIFICATION
+     ══════════════════════════════════════════════════════════════ -->
+<div id="screenOTP" class="hidden">
+
+  <nav class="bank-nav">
+    <button class="btn-back" id="btnBackOTPToMarketing">← Back</button>
+    <div class="bank-logo"><span class="logo-icon">🏦</span><span class="logo-text">ABC Bank</span></div>
+    <span></span>
+  </nav>
+
+  <div class="otp-container">
+
+    <!-- Step 1: Enter mobile -->
+    <div id="otpStep1">
+      <div class="otp-icon">📱</div>
+      <h2 class="otp-title">Verify Mobile Number</h2>
+      <p class="otp-sub">Enter your registered mobile number to receive a One-Time Password</p>
+      <div class="form-group" style="max-width:320px;margin:0 auto 20px">
+        <label class="form-label">Mobile Number</label>
+        <div class="amount-input-wrap">
+          <span class="amount-prefix" style="font-size:14px">+91</span>
+          <input class="form-input amount-input" id="otpMobile" type="tel"
+                 placeholder="10-digit number" maxlength="10"
+                 pattern="[6-9][0-9]{9}" inputmode="numeric" />
+        </div>
+        <p id="otpMobileErr" class="error-msg hidden"></p>
+      </div>
+      <button id="btnSendOTP" class="btn btn-primary" style="width:100%;max-width:320px">
+        Get OTP
+      </button>
+    </div>
+
+    <!-- Step 2: OTP sent + auto-fill -->
+    <div id="otpStep2" class="hidden">
+      <div class="otp-icon">✉️</div>
+      <h2 class="otp-title">OTP Sent!</h2>
+      <p class="otp-sub" id="otpSentMsg"></p>
+
+      <div class="otp-boxes" id="otpBoxes">
+        <input class="otp-digit" id="otp0" type="text" maxlength="1" inputmode="numeric" readonly />
+        <input class="otp-digit" id="otp1" type="text" maxlength="1" inputmode="numeric" readonly />
+        <input class="otp-digit" id="otp2" type="text" maxlength="1" inputmode="numeric" readonly />
+        <input class="otp-digit" id="otp3" type="text" maxlength="1" inputmode="numeric" readonly />
+        <input class="otp-digit" id="otp4" type="text" maxlength="1" inputmode="numeric" readonly />
+        <input class="otp-digit" id="otp5" type="text" maxlength="1" inputmode="numeric" readonly />
+      </div>
+      <p class="otp-filling-msg" id="otpFillingMsg">Fetching OTP…</p>
+    </div>
+
+    <!-- Step 3: Verified -->
+    <div id="otpStep3" class="hidden">
+      <div class="otp-icon">✅</div>
+      <h2 class="otp-title">Mobile Verified!</h2>
+      <p class="otp-sub" id="otpVerifiedMsg"></p>
+      <div class="otp-verified-badge">Mobile Number Verified Successfully</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCREEN 1 · MARKETING
+     ══════════════════════════════════════════════════════════════ -->
+<div id="screenMarketing">
+
+  <!-- Nav -->
+  <nav class="bank-nav">
+    <div class="bank-logo">
+      <span class="logo-icon">🏦</span>
+      <span class="logo-text">ABC Bank</span>
+    </div>
+    <span class="nav-tag">Personal Loan</span>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">Instant Approval</div>
+    <h1 class="hero-title">Personal Loan<br>up to <span class="hero-amount">₹5 Lakh</span></h1>
+    <p  class="hero-sub">Lowest interest rates · Minimal documentation · Disbursed in 24 hours</p>
+    <button id="btnApply" class="btn btn-hero">Apply for Personal Loan</button>
+  </div>
+
+  <!-- Benefits -->
+  <div class="benefits-grid">
+    <div class="benefit-card">
+      <div class="benefit-icon">⚡</div>
+      <div class="benefit-title">Instant Decision</div>
+      <div class="benefit-desc">Automated digital verification in minutes</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🔒</div>
+      <div class="benefit-title">100% Secure</div>
+      <div class="benefit-desc">Bank-grade encryption, RBI compliant</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">📄</div>
+      <div class="benefit-title">Minimal Docs</div>
+      <div class="benefit-desc">Just PAN + bank statement needed</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">💰</div>
+      <div class="benefit-title">Best Rates</div>
+      <div class="benefit-desc">Starting from 10.5% per annum</div>
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div class="section-card">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps">
+      <div class="step"><span class="step-num">1</span><span class="step-text">Fill basic application form (2 min)</span></div>
+      <div class="step"><span class="step-num">2</span><span class="step-text">Answer 3 identity verification questions on camera</span></div>
+      <div class="step"><span class="step-num">3</span><span class="step-text"><strong>Home verification</strong> — photos of your residence captured automatically (nameplate, rooms, exterior)</span></div>
+      <div class="step"><span class="step-num">4</span><span class="step-text">PAN &amp; identity verified digitally</span></div>
+      <div class="step"><span class="step-num">5</span><span class="step-text">Credit assessment &amp; instant loan decision</span></div>
+    </div>
+  </div>
+
+  <!-- What we capture -->
+  <div class="section-card">
+    <h2 class="section-title">What Will Be Captured</h2>
+    <div class="capture-grid">
+      <div class="capture-item"><span class="capture-icon">🤳</span><span class="capture-label">Selfie</span></div>
+      <div class="capture-item"><span class="capture-icon">🪧</span><span class="capture-label">Home Nameplate</span></div>
+      <div class="capture-item"><span class="capture-icon">🍳</span><span class="capture-label">Kitchen</span></div>
+      <div class="capture-item"><span class="capture-icon">🛏️</span><span class="capture-label">Bedrooms</span></div>
+      <div class="capture-item"><span class="capture-icon">🛋️</span><span class="capture-label">Hall / Living Room</span></div>
+      <div class="capture-item"><span class="capture-icon">🏠</span><span class="capture-label">Outside View</span></div>
+      <div class="capture-item"><span class="capture-icon">🪪</span><span class="capture-label">PAN Card</span></div>
+      <div class="capture-item"><span class="capture-icon">📍</span><span class="capture-label">GPS Location</span></div>
+    </div>
+    <p class="capture-note">All photos are captured on your device and used only for loan verification.</p>
+  </div>
+
+  <p class="fine-print">
+    Subject to credit assessment. T&amp;C apply. ABC Bank is a regulated financial institution.
+    Loan disbursal subject to KYC and home field verification.
+  </p>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCREEN 2 · APPLICATION FORM
+     ══════════════════════════════════════════════════════════════ -->
+<div id="screenForm" class="hidden">
+
+  <nav class="bank-nav">
+    <button class="btn-back" id="btnBackToMarketing">← Back</button>
+    <div class="bank-logo"><span class="logo-icon">🏦</span><span class="logo-text">ABC Bank</span></div>
+    <span></span>
+  </nav>
+
+  <div class="form-container">
+    <h2 class="form-title">Personal Loan Application</h2>
+    <p  class="form-sub">Fill in your details — takes about 2 minutes</p>
+
+    <form id="loanForm" novalidate>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="firstName">First Name <span class="req">*</span></label>
+          <input class="form-input" id="firstName" type="text"
+                 placeholder="e.g. Ramesh" autocomplete="given-name" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="lastName">Last Name <span class="req">*</span></label>
+          <input class="form-input" id="lastName" type="text"
+                 placeholder="e.g. Kumar" autocomplete="family-name" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="dob">Date of Birth <span class="req">*</span></label>
+        <input class="form-input" id="dob" type="date" required />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="address">Residential Address <span class="req">*</span></label>
+        <textarea class="form-input form-textarea" id="address" rows="2"
+                  placeholder="House / Flat no., Street, Area" required></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="city">City <span class="req">*</span></label>
+          <input class="form-input" id="city" type="text"
+                 placeholder="e.g. Mumbai" autocomplete="address-level2" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="panNumber">PAN Number <span class="req">*</span></label>
+          <input class="form-input" id="panNumber" type="text"
+                 placeholder="ABCDE1234F" maxlength="10"
+                 pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="mobileNumber">
+          Mobile Number &nbsp;<span class="verified-lock">🔒 Verified</span>
+        </label>
+        <div class="verified-input-wrap">
+          <div class="verified-prefix">+91</div>
+          <input class="verified-input" id="mobileNumber" type="tel"
+                 maxlength="10" readonly tabindex="-1" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="incomeRange">Annual Income Range <span class="req">*</span></label>
+        <select class="form-input form-select" id="incomeRange" required>
+          <option value="" disabled selected>Select your income range</option>
+          <option value="Under 2L">Under ₹2 Lakh</option>
+          <option value="2-5L">₹2 Lakh – ₹5 Lakh</option>
+          <option value="5-20L">₹5 Lakh – ₹20 Lakh</option>
+          <option value="21-100L">₹21 Lakh – ₹1 Crore</option>
+          <option value="1Cr+">₹1 Crore &amp; Above</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="loanAmount">Loan Amount Required <span class="req">*</span></label>
+        <div class="amount-input-wrap">
+          <span class="amount-prefix">₹</span>
+          <input class="form-input amount-input" id="loanAmount" type="number"
+                 placeholder="e.g. 300000" min="10000" max="50000000" required />
+        </div>
+        <p class="form-hint" id="loanAmountHint">Enter amount in rupees</p>
+      </div>
+
+      <p id="formError" class="error-msg hidden"></p>
+      <button type="submit" class="btn btn-primary btn-full">Review Application</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCREEN 3 · REVIEW
+     ══════════════════════════════════════════════════════════════ -->
+<div id="screenReview" class="hidden">
+
+  <nav class="bank-nav">
+    <button class="btn-back" id="btnBackToForm">← Edit</button>
+    <div class="bank-logo"><span class="logo-icon">🏦</span><span class="logo-text">ABC Bank</span></div>
+    <span></span>
+  </nav>
+
+  <div class="form-container">
+    <h2 class="form-title">Review Your Details</h2>
+    <p  class="form-sub">Confirm the information before starting verification</p>
+
+    <div id="reviewTable" class="review-table"></div>
+
+    <div class="fi-info-card">
+      <div class="fi-info-title">📋 What Happens Next</div>
+      <ul class="fi-info-list">
+        <li>🎤 &nbsp;Answer <strong>3 spoken questions</strong> for identity verification</li>
+        <li>🤳 &nbsp;<strong>Selfie</strong> captured for face verification</li>
+        <li>🏠 &nbsp;<strong>Home verification photos</strong> — our system will ask you to show:
+          <ul class="fi-sub-list">
+            <li>Home nameplate / door sign</li>
+            <li>Kitchen, Bedroom(s), Hall</li>
+            <li>Front view outside your home</li>
+          </ul>
+        </li>
+        <li>🪪 &nbsp;<strong>PAN card</strong> scanned &amp; verified with NSDL</li>
+        <li>📍 &nbsp;GPS location captured at each step</li>
+        <li>🏦 &nbsp;Bank statement retrieved automatically from your bank</li>
+        <li>📹 &nbsp;Entire session recorded (audio + video) for compliance</li>
+      </ul>
+      <p class="fi-info-note">⚠ Allow camera, microphone &amp; location when prompted. The whole process takes 5–10 minutes.</p>
+    </div>
+
+    <p id="reviewError" class="error-msg hidden"></p>
+    <button id="btnStartFI" class="btn btn-primary btn-full">Start Field Investigation</button>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCREEN 3b · VIDEO PD (Coming Soon — for loans > ₹5 Lakh)
+     ══════════════════════════════════════════════════════════════ -->
+<div id="screenVideoPD" class="hidden">
+
+  <nav class="bank-nav">
+    <button class="btn-back" id="btnBackFromVideoPD">← Change Amount</button>
+    <div class="bank-logo"><span class="logo-icon">🏦</span><span class="logo-text">ABC Bank</span></div>
+    <span></span>
+  </nav>
+
+  <div class="vpd-container">
+    <div class="vpd-coming-badge">Coming Soon</div>
+    <div class="vpd-icon">📹</div>
+    <h2 class="vpd-title">Video Personal Discussion</h2>
+    <div class="vpd-amount-card" id="vpdAmountCard"></div>
+    <p class="vpd-desc">
+      For loan amounts above <strong>₹5 Lakh</strong>, we conduct a
+      <strong>Video Personal Discussion (Video PD)</strong> with one of our
+      credit officers to complete your loan verification.
+    </p>
+    <div class="vpd-soon-box">
+      <div class="vpd-soon-icon">🚀</div>
+      <div>
+        <div class="vpd-soon-title">Video PD Feature — Under Development</div>
+        <div class="vpd-soon-sub">
+          Our Video PD verification will be available shortly.
+          You'll be able to connect with a credit officer via a secure live video call.
+        </div>
+      </div>
+    </div>
+    <p class="vpd-options-title">In the meantime, you can:</p>
+    <div class="vpd-options">
+      <div class="vpd-option">
+        <span class="vpd-option-icon">✏️</span>
+        <span>Reduce the loan amount to <strong>₹5 Lakh or below</strong> to proceed with instant Field Investigation</span>
+      </div>
+      <div class="vpd-option">
+        <span class="vpd-option-icon">🏦</span>
+        <span>Visit your nearest <strong>ABC Bank branch</strong> for assisted processing</span>
+      </div>
+      <div class="vpd-option">
+        <span class="vpd-option-icon">📞</span>
+        <span>Call our loan helpline: <strong>1800-XXX-XXXX</strong> (toll free)</span>
+      </div>
+    </div>
+    <button id="btnReduceAmount" class="btn btn-primary btn-full" style="max-width:340px">
+      Change Loan Amount
+    </button>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCREEN 4 · FI SESSION
+     ══════════════════════════════════════════════════════════════ -->
+<div id="session" class="hidden">
+
+  <!-- Full-screen camera preview -->
+  <video id="videoPreview" autoplay playsinline muted></video>
+
+  <!-- Photo review overlay -->
+  <img id="photoPreview" class="hidden" alt="captured photo" />
+
+  <!-- Full-screen consent card (bank statement retrieval) -->
+  <div id="consentScreen" class="consent-screen hidden">
+    <div class="consent-card">
+      <div class="consent-icon">🏦</div>
+      <h2 class="consent-title">Bank Statement Retrieval</h2>
+      <p  class="consent-body" id="consentBody"></p>
+      <div class="consent-points">
+        <div class="consent-point"><span>🔒</span><span>Your data is encrypted and secure</span></div>
+        <div class="consent-point"><span>📋</span><span>Used only for this loan application</span></div>
+        <div class="consent-point"><span>🏛️</span><span>Compliant with RBI data privacy guidelines</span></div>
+      </div>
+      <button id="btnConsentAgree"  class="btn btn-primary btn-full consent-agree-btn">I Agree — Retrieve Statement</button>
+      <button id="btnConsentDecline" class="btn-consent-skip">Skip this step</button>
+    </div>
+  </div>
+
+  <!-- Photo review popup (shown during ReviewPhoto state) -->
+  <div id="photoReviewPopup" class="photo-popup hidden">
+    <div class="photo-popup-card">
+      <div class="photo-popup-header" id="popupHeader"></div>
+      <img id="popupImage" alt="Captured photo" />
+      <div class="photo-popup-geo" id="popupGeo"></div>
+      <div class="photo-popup-actions">
+        <button id="btnPopupDiscard" class="btn btn-discard">Discard</button>
+        <button id="btnPopupSave"    class="btn btn-save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thank-you screen (shown after successful submit) -->
+  <div id="thankyou" class="thankyou hidden">
+    <div class="thankyou-card">
+      <div class="thankyou-icon">✅</div>
+      <h2 class="thankyou-title">Thank You!</h2>
+      <p  class="thankyou-body" id="thankyouBody"></p>
+      <div class="thankyou-ref" id="thankyouRef"></div>
+    </div>
+  </div>
+
+  <!-- Bottom overlay panel -->
+  <div id="overlay">
+    <p id="tvMessage"    class="msg-text"></p>
+    <p id="tvTranscript" class="transcript hidden"></p>
+    <div id="tvCountdown"    class="countdown hidden">5</div>
+    <div id="ivMicIndicator" class="mic-indicator hidden">🎙</div>
+
+    <div id="layoutReview" class="review-buttons hidden">
+      <button id="btnDiscard" class="btn btn-discard">Discard</button>
+      <button id="btnSave"    class="btn btn-save">Save</button>
+    </div>
+
+    <button id="btnSubmit" class="btn btn-primary btn-submit hidden">Submit FI Report</button>
+    <div    id="progressBar" class="progress hidden"></div>
+  </div>
+</div>
+
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
